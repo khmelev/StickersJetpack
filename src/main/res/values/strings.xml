@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Stickers Jetpack</string>
+    <string name="navigation_drawer_header_title">Stickers Jetpack</string>
+    <string name="navigation_drawer_header_content_description"><![CDATA[Navigation drawer header logo<]]></string>
 </resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/app_navigation"
+            app:startDestination="@id/category_one_list_fragment">
+
+    <fragment android:id="@+id/category_one_list_fragment"
+              android:name="ru.av3969.stickers.jetpack.CategoryListFragment"
+              tools:layout="@layout/fragment_category_list">
+        <action android:id="@+id/action_category_one_list_fragment_to_category_two_list_fragment"
+                app:destination="@id/category_two_list_fragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/category_two_list_fragment"
+              android:name="ru.av3969.stickers.jetpack.CategoryListFragment"
+              tools:layout="@layout/fragment_category_list"/>
+</navigation>
