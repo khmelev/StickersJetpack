@@ -12,7 +12,6 @@ import ru.av3969.stickers.jetpack.databinding.FragmentCategoryListBinding
 import ru.av3969.stickers.jetpack.utilities.InjectorUtils
 import ru.av3969.stickers.jetpack.viewmodels.CategoryListViewModel
 
-
 class CategoryListFragment : Fragment() {
 
     private lateinit var viewModel: CategoryListViewModel
@@ -22,22 +21,30 @@ class CategoryListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentCategoryListBinding.inflate(inflater, container, false)
-        val context = context ?: return binding.root
-
-        val factory = InjectorUtils.provideCategoryListViewModelFactory(context)
-        viewModel = ViewModelProviders.of(this, factory).get(CategoryListViewModel::class.java)
 
         val adapter = CategoryAdapter()
         binding.categoryList.adapter = adapter
-        subscribeUI(adapter)
+
+        val parentId = arguments?.let { CategoryListFragmentArgs.fromBundle(it).catId } ?: 0
+
+        subscribeUI(adapter, binding, parentId)
+
         return binding.root
     }
 
-    private fun subscribeUI(adapter: CategoryAdapter) {
+    private fun subscribeUI(adapter: CategoryAdapter, binding: FragmentCategoryListBinding, parentId: Int) {
+        val context = context ?: return
+        val factory = InjectorUtils.provideCategoryListViewModelFactory(context)
+        viewModel = ViewModelProviders.of(this, factory).get(CategoryListViewModel::class.java)
+
         viewModel.categories.observe(this, Observer {
             if (it != null && it.isNotEmpty()) {
                 adapter.submitList(it)
+            } else {
+                binding.noData = true
             }
         })
+
+        viewModel.loadCategories(parentId)
     }
 }

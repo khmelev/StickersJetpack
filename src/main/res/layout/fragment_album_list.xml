@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".AlbumListFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/album_list"
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="noData" type="boolean"/>
+    </data>
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingLeft="@dimen/margin_normal"
-            android:paddingRight="@dimen/margin_normal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    />
+            tools:context=".AlbumListFragment">
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/album_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingLeft="@dimen/margin_normal"
+                android:paddingRight="@dimen/margin_normal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/list_item_album"/>
+        <TextView
+                android:text="@string/msg_data_not_loaded"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                app:isVisible="@{noData}"
+                android:visibility="gone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    </FrameLayout>
+</layout>

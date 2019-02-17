@@ -2,6 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="noData" type="boolean"/>
+    </data>
 
     <FrameLayout
             android:layout_width="match_parent"
@@ -17,6 +20,13 @@
                 android:paddingRight="@dimen/margin_normal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/list_item_category"/>
-
+        <TextView
+                android:text="@string/msg_data_not_loaded"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                app:isVisible="@{noData}"
+                android:visibility="gone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     </FrameLayout>
 </layout>

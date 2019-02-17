@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import ru.av3969.stickers.jetpack.databinding.FragmentAlbumListBinding
 import ru.av3969.stickers.jetpack.viewmodels.AlbumListViewModel
 
 class AlbumListFragment : Fragment() {
@@ -17,13 +18,14 @@ class AlbumListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_album_list, container, false)
+        val binding = FragmentAlbumListBinding.inflate(inflater, container, false)
+        subscribeUI(binding)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private fun subscribeUI(binding: FragmentAlbumListBinding) {
+        binding.noData = true
         viewModel = ViewModelProviders.of(this).get(AlbumListViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

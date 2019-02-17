@@ -1,15 +1,17 @@
 package ru.av3969.stickers.jetpack.utilities
 
 import android.content.Context
+import ru.av3969.stickers.jetpack.data.AppDatabase
 import ru.av3969.stickers.jetpack.data.LaststickerHelper
 import ru.av3969.stickers.jetpack.data.Repository
 import ru.av3969.stickers.jetpack.viewmodels.CategoryListViewModelFactory
 
 object InjectorUtils {
 
-    private fun getRepository() : Repository {
+    private fun getRepository(context: Context) : Repository {
         val laststickerHelper = getLaststickerHelper()
-        return Repository.getInstance(laststickerHelper)
+        val categoryDao = AppDatabase.getInstance(context.applicationContext).categoryDao()
+        return Repository.getInstance(laststickerHelper, categoryDao)
     }
 
     private fun getLaststickerHelper(): LaststickerHelper {
@@ -17,7 +19,7 @@ object InjectorUtils {
     }
 
     fun provideCategoryListViewModelFactory(context: Context): CategoryListViewModelFactory {
-        val repository = getRepository()
+        val repository = getRepository(context)
         return CategoryListViewModelFactory(repository)
     }
 }

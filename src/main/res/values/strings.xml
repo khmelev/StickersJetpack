@@ -2,4 +2,6 @@
     <string name="app_name">Stickers Jetpack</string>
     <string name="navigation_drawer_header_title">Stickers Jetpack</string>
     <string name="navigation_drawer_header_content_description"><![CDATA[Navigation drawer header logo<]]></string>
+    <string name="msg_data_not_loaded">Data not loaded :(</string>
+    <string name="img_desc_album_cover">Album cover</string>
 </resources>

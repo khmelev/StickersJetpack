@@ -7,11 +7,40 @@
     <fragment android:id="@+id/category_one_list_fragment"
               android:name="ru.av3969.stickers.jetpack.CategoryListFragment"
               tools:layout="@layout/fragment_category_list">
-        <action android:id="@+id/action_category_one_list_fragment_to_category_two_list_fragment"
-                app:destination="@id/category_two_list_fragment"/>
+        <action android:id="@+id/next_action"
+                app:destination="@id/category_two_list_fragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment android:id="@+id/category_two_list_fragment"
               android:name="ru.av3969.stickers.jetpack.CategoryListFragment"
-              tools:layout="@layout/fragment_category_list"/>
+              tools:layout="@layout/fragment_category_list">
+        <argument
+                android:name="catId"
+                app:argType="integer"/>
+        <argument
+                android:name="catName"
+                app:argType="string"/>
+        <action android:id="@+id/next_action"
+                app:destination="@id/album_list_fragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/album_list_fragment"
+              android:name="ru.av3969.stickers.jetpack.AlbumListFragment"
+              android:label="fragment_album_list"
+              tools:layout="@layout/fragment_album_list">
+        <argument
+                android:name="catId"
+                app:argType="integer"/>
+        <argument
+                android:name="catName"
+                app:argType="string"/>
+    </fragment>
 </navigation>
