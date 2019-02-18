@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.av3969.stickers.jetpack.databinding.FragmentAlbumListBinding
+import ru.av3969.stickers.jetpack.utilities.InjectorUtils
 import ru.av3969.stickers.jetpack.viewmodels.AlbumListViewModel
 
 class AlbumListFragment : Fragment() {
@@ -24,8 +25,9 @@ class AlbumListFragment : Fragment() {
     }
 
     private fun subscribeUI(binding: FragmentAlbumListBinding) {
-        binding.noData = true
-        viewModel = ViewModelProviders.of(this).get(AlbumListViewModel::class.java)
+        val context = context ?: return
+        val factory = InjectorUtils.provideAlbumListViewModelFactory(context)
+        viewModel = ViewModelProviders.of(this, factory).get(AlbumListViewModel::class.java)
     }
 
 }

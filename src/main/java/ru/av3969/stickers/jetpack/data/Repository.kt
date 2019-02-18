@@ -16,6 +16,10 @@ class Repository private constructor(
 
     fun getCategories(parentId: Int) = categoryDao.getCategoriesByParent(parentId)
 
+    fun getAlbums(catName: String): List<Album> {
+        return listOf()
+    }
+
     companion object {
         @Volatile private var instance: Repository? = null
 

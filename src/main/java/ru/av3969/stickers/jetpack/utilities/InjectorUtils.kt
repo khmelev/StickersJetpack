@@ -4,6 +4,7 @@ import android.content.Context
 import ru.av3969.stickers.jetpack.data.AppDatabase
 import ru.av3969.stickers.jetpack.data.LaststickerHelper
 import ru.av3969.stickers.jetpack.data.Repository
+import ru.av3969.stickers.jetpack.viewmodels.AlbumListViewModelFactory
 import ru.av3969.stickers.jetpack.viewmodels.CategoryListViewModelFactory
 
 object InjectorUtils {
@@ -21,5 +22,10 @@ object InjectorUtils {
     fun provideCategoryListViewModelFactory(context: Context): CategoryListViewModelFactory {
         val repository = getRepository(context)
         return CategoryListViewModelFactory(repository)
+    }
+
+    fun provideAlbumListViewModelFactory(context: Context): AlbumListViewModelFactory {
+        val repository = getRepository(context)
+        return AlbumListViewModelFactory(repository)
     }
 }

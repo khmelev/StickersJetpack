@@ -24,12 +24,6 @@ class CategoryListViewModel(
 
     private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-//    init {
-//        viewModelScope.launch(IO) {
-//            _categories.postValue(repository.getRootCategories())
-//        }
-//    }
-
     fun loadCategories(parentId: Int) {
         viewModelScope.launch(IO) {
             _categories.postValue(
