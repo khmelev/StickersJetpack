@@ -17,7 +17,7 @@ class AlbumListViewModel(
 ) : ViewModel() {
 
     private val _albums = MutableLiveData<List<Album>>()
-    val album: LiveData<List<Album>>
+    val albums: LiveData<List<Album>>
         get() = _albums
 
     private val viewModelJob = Job()

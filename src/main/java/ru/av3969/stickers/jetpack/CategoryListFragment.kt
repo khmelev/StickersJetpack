@@ -25,17 +25,16 @@ class CategoryListFragment : Fragment() {
         val adapter = CategoryAdapter()
         binding.categoryList.adapter = adapter
 
-        val parentId = arguments?.let { CategoryListFragmentArgs.fromBundle(it).catId } ?: 0
-
-        subscribeUI(adapter, binding, parentId)
+        subscribeUI(adapter, binding)
 
         return binding.root
     }
 
-    private fun subscribeUI(adapter: CategoryAdapter, binding: FragmentCategoryListBinding, parentId: Int) {
+    private fun subscribeUI(adapter: CategoryAdapter, binding: FragmentCategoryListBinding) {
         val context = context ?: return
         val factory = InjectorUtils.provideCategoryListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(CategoryListViewModel::class.java)
+
 
         viewModel.categories.observe(this, Observer {
             if (it != null && it.isNotEmpty()) {
@@ -45,6 +44,7 @@ class CategoryListFragment : Fragment() {
             }
         })
 
+        val parentId = arguments?.let { CategoryListFragmentArgs.fromBundle(it).catId } ?: 0
         viewModel.loadCategories(parentId)
     }
 }

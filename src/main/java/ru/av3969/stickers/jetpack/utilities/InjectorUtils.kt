@@ -12,7 +12,8 @@ object InjectorUtils {
     private fun getRepository(context: Context) : Repository {
         val laststickerHelper = getLaststickerHelper()
         val categoryDao = AppDatabase.getInstance(context.applicationContext).categoryDao()
-        return Repository.getInstance(laststickerHelper, categoryDao)
+        val albumDao = AppDatabase.getInstance(context.applicationContext).albumDao()
+        return Repository.getInstance(laststickerHelper, categoryDao, albumDao)
     }
 
     private fun getLaststickerHelper(): LaststickerHelper {
