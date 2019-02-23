@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="album" type="ru.av3969.stickers.jetpack.data.Album"/>
+        <variable name="albumYear" type="String"/>
+        <variable name="albumTypeSize" type="String"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+        <ImageView
+                android:id="@+id/imgAlbumCover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="@string/img_desc_album_cover"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/albumTitle"/>
+        <TextView
+                android:id="@+id/albumTitle"
+                android:text="@{album.title}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" tools:text="PANINI Чемпионат Мира 2018"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"/>
+        <TextView
+                android:id="@+id/albumSize"
+                android:text="@{albumTypeSize}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/albumYearOfCreation"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                tools:text="Наклеек в коллекции: 838"/>
+        <TextView
+                android:id="@+id/albumYearOfCreation"
+                android:text="@{albumYear}"
+                tools:text="Год выпуска: 2018"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" app:layout_constraintTop_toBottomOf="@+id/albumTitle"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"/>
+        <TextView
+                android:id="@+id/albumDescription"
+                android:text="@{album.description}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="Коллекция наклеек от Panini посвящена чемпионату мира по футболу 2018 в России."
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/albumSize"
+                app:layout_constraintEnd_toStartOf="@+id/imgAlbumCover"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -35,6 +35,7 @@ class AlbumAdapter : ListAdapter<Album, AlbumAdapter.ViewHolder>(AlbumDiffCallba
             binding.apply {
                 album = item
                 clickListener = listener
+                albumTypeAndSize = item.albumTypeAndSize(itemView.context)
             }
         }
     }

@@ -1,10 +1,9 @@
 package ru.av3969.stickers.jetpack.data
 
-import android.util.Log
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.io.IOException
-import java.util.ArrayList
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -16,6 +15,8 @@ class LaststickerHelper {
 
     private fun getCollectionsUrl(categoryName: String) =
         "$baseUrl$categoryPath$collectionsPath$categoryName/"
+
+    private fun getCollectionUrl(albumName: String) = "$baseUrl$categoryPath$albumName/"
 
 
     fun getCategoryList(): List<Category> {
@@ -83,7 +84,7 @@ class LaststickerHelper {
                 //Ищем name и title
                 val albumTitle = albumItem.selectFirst("h3 > a")
                 val strAr = patternUrlSplit.split(albumTitle.attr("href"))
-                val collName = if (strAr.size > 0) strAr[strAr.size - 1] else ""
+                val collName = if (strAr.isNotEmpty()) strAr[strAr.size - 1] else ""
                 val collTitle = albumTitle.text()
 
                 //Ищем год
@@ -104,15 +105,37 @@ class LaststickerHelper {
                 val collDesc = albumItem.selectFirst("p").text()
 
                 collectionList.add(
-                    Album(
-                        collId, collName, collTitle, categoryName,
-                        collYear, collStype, collSize, collDesc
-                    )
+                    Album(collId, collName, collTitle, categoryName,
+                        collYear, collStype, collSize, collDesc)
                 )
             }
         }
 
         return collectionList
+    }
+
+    fun getStickersList(album: Album): List<Sticker> {
+        val stickers = ArrayList<Sticker>()
+
+        val doc: Document
+
+        try {
+            doc = Jsoup.connect(getCollectionUrl(album.name)).get()
+        } catch (e: IOException) {
+            return stickers
+        }
+
+        val content = doc.selectFirst("table#checklist tbody")
+
+        for (tr in content.select("tr")) {
+            val number = tr.selectFirst("td")
+            val name = number.nextElementSibling()
+            val section = name.nextElementSibling()
+            val type = section.nextElementSibling()
+
+            stickers.add(Sticker(album.id, number.text(), name.text(), section.text(), type.text()))
+        }
+        return stickers
     }
 
     companion object {
@@ -121,6 +144,9 @@ class LaststickerHelper {
         const val baseUrl = "https://www.laststicker.ru/"
         const val categoryPath = "cards/"
         const val collectionsPath = "s/"
+        const val imagePath = "i/album/"
+        const val imageExt = ".jpg"
+        const val smallVersionSuffix = "_s"
 
         fun getInstance() : LaststickerHelper {
             return instance ?: synchronized(this) {

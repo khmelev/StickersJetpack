@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import ru.av3969.stickers.jetpack.utilities.DATABASE_NAME
 
-@Database(entities = [Category::class, Album::class], version = 1, exportSchema = false)
+@Database(entities = [Category::class, Album::class, Sticker::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun albumDao(): AlbumDao
+    abstract fun stickerDao(): StickerDao
 
     companion object {
 

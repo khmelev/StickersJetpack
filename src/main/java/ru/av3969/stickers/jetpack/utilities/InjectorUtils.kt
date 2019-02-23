@@ -4,6 +4,7 @@ import android.content.Context
 import ru.av3969.stickers.jetpack.data.AppDatabase
 import ru.av3969.stickers.jetpack.data.LaststickerHelper
 import ru.av3969.stickers.jetpack.data.Repository
+import ru.av3969.stickers.jetpack.viewmodels.AlbumDetailViewModelFactory
 import ru.av3969.stickers.jetpack.viewmodels.AlbumListViewModelFactory
 import ru.av3969.stickers.jetpack.viewmodels.CategoryListViewModelFactory
 
@@ -13,7 +14,8 @@ object InjectorUtils {
         val laststickerHelper = getLaststickerHelper()
         val categoryDao = AppDatabase.getInstance(context.applicationContext).categoryDao()
         val albumDao = AppDatabase.getInstance(context.applicationContext).albumDao()
-        return Repository.getInstance(laststickerHelper, categoryDao, albumDao)
+        val stickerDao = AppDatabase.getInstance(context.applicationContext).stickerDao()
+        return Repository.getInstance(laststickerHelper, categoryDao, albumDao, stickerDao)
     }
 
     private fun getLaststickerHelper(): LaststickerHelper {
@@ -28,5 +30,9 @@ object InjectorUtils {
     fun provideAlbumListViewModelFactory(context: Context): AlbumListViewModelFactory {
         val repository = getRepository(context)
         return AlbumListViewModelFactory(repository)
+    }
+
+    fun provideAlbumDetailViewModelFactory(context: Context, albumId: Int): AlbumDetailViewModelFactory {
+        return AlbumDetailViewModelFactory(getRepository(context), albumId)
     }
 }

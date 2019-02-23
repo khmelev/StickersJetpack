@@ -52,6 +52,8 @@
     <fragment android:id="@+id/album_detail_fragment"
               android:name="ru.av3969.stickers.jetpack.AlbumDetailFragment"
               tools:layout="@layout/fragment_album_detail">
-        <argument android:name="albumId" app:argType="integer"/>
+        <argument
+                android:name="albumId"
+                app:argType="integer"/>
     </fragment>
 </navigation>

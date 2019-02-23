@@ -4,4 +4,7 @@
     <string name="navigation_drawer_header_content_description"><![CDATA[Navigation drawer header logo<]]></string>
     <string name="msg_data_not_loaded">Data not loaded :(</string>
     <string name="img_desc_album_cover">Album cover</string>
+    <string name="number_of_cards">Number of cards: %1$d</string>
+    <string name="number_of_stickers">Number of stickers: %1$d</string>
+    <string name="year_of_creation">Year of creation: %1$d</string>
 </resources>
