@@ -44,8 +44,6 @@ class AlbumDetailFragment : Fragment() {
         detailViewModel.album.observe(this, Observer { album ->
             with(album) {
                 binding.album = this
-                binding.albumTypeSize = albumTypeAndSize(context)
-                binding.albumYear = albumYearOfCreation(context)
             }
 
         })

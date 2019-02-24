@@ -5,8 +5,6 @@
     <data>
         <variable name="noData" type="boolean"/>
         <variable name="album" type="ru.av3969.stickers.jetpack.data.Album"/>
-        <variable name="albumYear" type="String"/>
-        <variable name="albumTypeSize" type="String"/>
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
@@ -23,8 +21,7 @@
                      android:layout_height="wrap_content"
                      layout="@layout/include_album_details"
                      app:album="@{album}"
-                     app:albumYear="@{albumYear}"
-                     app:albumTypeSize="@{albumTypeSize}" android:layout_marginBottom="@dimen/margin_small"/>
+                     android:layout_marginBottom="@dimen/margin_small"/>
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/sticker_list"
@@ -41,8 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                app:isVisible="@{noData}"
-                android:visibility="gone"
+                android:visibility="@{noData}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 tools:text="@string/msg_data_not_loaded"
                 android:layout_gravity="center"/>

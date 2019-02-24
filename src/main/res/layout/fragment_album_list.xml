@@ -23,8 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                app:isVisible="@{noData}"
-                android:visibility="gone"
+                android:visibility="@{noData}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     </FrameLayout>
 </layout>

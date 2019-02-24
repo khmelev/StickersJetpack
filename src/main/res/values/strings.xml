@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Stickers Jetpack</string>
-    <string name="navigation_drawer_header_title">Stickers Jetpack</string>
-    <string name="navigation_drawer_header_content_description"><![CDATA[Navigation drawer header logo<]]></string>
+    <string name="app_name" translatable="false">Stickers Jetpack</string>
+    <string name="navigation_drawer_header_title" translatable="false">Stickers Jetpack</string>
+    <string name="navigation_drawer_header_content_description" translatable="false"><![CDATA[Navigation drawer header logo<]]></string>
     <string name="msg_data_not_loaded">Data not loaded :(</string>
     <string name="img_desc_album_cover">Album cover</string>
     <string name="number_of_cards">Number of cards: %1$d</string>

@@ -1,9 +1,8 @@
 package ru.av3969.stickers.jetpack.data
 
-import android.content.Context
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import ru.av3969.stickers.jetpack.R
 
 @Entity(tableName = "albums")
 data class Album(
@@ -20,18 +19,17 @@ data class Album(
         return title
     }
 
-    fun albumTypeAndSize(context: Context): String =
-        if(type == Album.STICKER_TYPE) {
-            context.getString(R.string.number_of_stickers, size)
-        } else {
-            context.getString(R.string.number_of_cards, size)
-        }
-
-    fun albumYearOfCreation(context: Context): String =
-        context.getString(R.string.year_of_creation, year)
+    @Ignore
+    val coverURL = "$coverBaseURL$id$imageExt"
+    @Ignore
+    val coverTinyURL = "$coverBaseURL$id$tinyVersionSuffix$imageExt"
 
     companion object {
         const val STICKER_TYPE = 1
         const val CARD_TYPE = 2
+
+        private const val coverBaseURL = "https://www.laststicker.ru/i/album/"
+        private const val tinyVersionSuffix = "_s"
+        private const val imageExt = ".jpg"
     }
 }
