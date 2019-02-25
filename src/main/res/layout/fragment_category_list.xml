@@ -26,6 +26,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:visibility="@{noData}"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tools:visibility="gone"/>
     </FrameLayout>
 </layout>

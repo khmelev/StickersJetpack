@@ -12,27 +12,26 @@
             android:layout_height="match_parent"
             tools:context=".AlbumDetailFragment">
 
-        <LinearLayout
-                android:orientation="vertical"
+        <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent">
 
             <include android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      layout="@layout/include_album_details"
                      app:album="@{album}"
+                     app:layout_scrollFlags="scroll|exitUntilCollapsed"
                      android:layout_marginBottom="@dimen/margin_small"/>
+        </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sticker_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item_sticker"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-        </LinearLayout>
-
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sticker_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/list_item_sticker"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
         <TextView
                 android:text="@string/msg_data_not_loaded"
                 android:layout_width="wrap_content"
@@ -41,7 +40,8 @@
                 android:visibility="@{noData}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 tools:text="@string/msg_data_not_loaded"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                tools:visibility="gone"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
