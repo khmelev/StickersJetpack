@@ -6,7 +6,8 @@
 
     <fragment android:id="@+id/category_one_list_fragment"
               android:name="ru.av3969.stickers.jetpack.CategoryListFragment"
-              tools:layout="@layout/fragment_category_list">
+              tools:layout="@layout/fragment_category_list"
+              android:label="@string/categories">
         <action android:id="@+id/next_action"
                 app:destination="@id/category_two_list_fragment"
                 app:enterAnim="@anim/slide_in_right"
@@ -17,7 +18,8 @@
 
     <fragment android:id="@+id/category_two_list_fragment"
               android:name="ru.av3969.stickers.jetpack.CategoryListFragment"
-              tools:layout="@layout/fragment_category_list">
+              tools:layout="@layout/fragment_category_list"
+              android:label="@string/subcategories">
         <argument
                 android:name="catId"
                 app:argType="integer"/>
@@ -34,7 +36,7 @@
 
     <fragment android:id="@+id/album_list_fragment"
               android:name="ru.av3969.stickers.jetpack.AlbumListFragment"
-              android:label="fragment_album_list"
+              android:label="@string/albums"
               tools:layout="@layout/fragment_album_list">
         <argument
                 android:name="catId"
@@ -51,7 +53,8 @@
     </fragment>
     <fragment android:id="@+id/album_detail_fragment"
               android:name="ru.av3969.stickers.jetpack.AlbumDetailFragment"
-              tools:layout="@layout/fragment_album_detail">
+              tools:layout="@layout/fragment_album_detail"
+              android:label="@string/album">
         <argument
                 android:name="albumId"
                 app:argType="integer"/>

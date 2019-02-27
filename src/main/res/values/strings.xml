@@ -7,4 +7,9 @@
     <string name="number_of_cards">Number of cards: %1$d</string>
     <string name="number_of_stickers">Number of stickers: %1$d</string>
     <string name="year_of_creation">Year of creation: %1$d</string>
+    <string name="category">Category</string>
+    <string name="categories">Categories</string>
+    <string name="subcategories">Subcategories</string>
+    <string name="albums">Albums</string>
+    <string name="album">Album</string>
 </resources>

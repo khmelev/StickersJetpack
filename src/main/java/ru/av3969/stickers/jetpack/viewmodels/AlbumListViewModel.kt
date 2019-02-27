@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import ru.av3969.stickers.jetpack.data.Album
 import ru.av3969.stickers.jetpack.data.Repository
 
@@ -20,15 +17,28 @@ class AlbumListViewModel(
     val albums: LiveData<List<Album>>
         get() = _albums
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
+
     private val viewModelJob = Job()
 
     private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     fun loadAlbums(catName: String) {
         viewModelScope.launch(IO) {
-            _albums.postValue(
-                repository.getAlbums(catName)
-            )
+            delay(1500) //Имитация загрузки для проверки прогресс бара
+            repository.getAlbums(catName).let{
+                _loading.postValue(false)
+                _albums.postValue(it)
+            }
+
+        }
+        viewModelScope.launch {
+            delay(200)
+            if(_albums.value == null) {
+                _loading.value = true
+            }
         }
     }
 

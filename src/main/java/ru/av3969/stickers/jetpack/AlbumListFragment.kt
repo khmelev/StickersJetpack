@@ -41,6 +41,9 @@ class AlbumListFragment : Fragment() {
                 binding.noData = true
             }
         })
+        viewModel.loading.observe(this, Observer {
+            binding.loading = it
+        })
         val catName = arguments?.let { AlbumListFragmentArgs.fromBundle(it).catName } ?: ""
         viewModel.loadAlbums(catName)
     }

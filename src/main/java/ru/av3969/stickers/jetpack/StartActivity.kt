@@ -9,6 +9,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import ru.av3969.stickers.jetpack.databinding.ActivityStartBinding
 
 class StartActivity : AppCompatActivity() {
@@ -28,6 +30,9 @@ class StartActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
         setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        binding.navigationView.setupWithNavController(navController)
 
     }
     override fun onSupportNavigateUp(): Boolean {
