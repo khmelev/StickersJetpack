@@ -2,8 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="noData" type="boolean"/>
-        <variable name="loading" type="boolean"/>
+        <variable name="viewmodel" type="ru.av3969.stickers.jetpack.viewmodels.AlbumListViewModel"/>
     </data>
     <FrameLayout
             android:layout_width="match_parent"
@@ -24,14 +23,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:visibility="@{noData}"
+                android:visibility="@{viewmodel.nodata}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" tools:visibility="gone"/>
         <ProgressBar
                 android:id="@+id/progressBar"
                 style="@style/Widget.AppCompat.ProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="@{loading}"
-                android:layout_gravity="center"/>
+                android:visibility="@{viewmodel.loading}"
+                android:layout_gravity="center"
+                tools:visibility="gone"/>
     </FrameLayout>
 </layout>

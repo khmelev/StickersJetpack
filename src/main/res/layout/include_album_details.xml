@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="album" type="ru.av3969.stickers.jetpack.data.Album"/>
+        <variable name="viewmodel" type="ru.av3969.stickers.jetpack.viewmodels.AlbumDetailViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -13,7 +13,7 @@
                 android:id="@+id/imgAlbumCover"
                 android:layout_width="80dp"
                 android:layout_height="100dp"
-                app:image_from_url="@{album.coverURL}"
+                app:image_from_url="@{viewmodel.album.coverURL}"
                 android:scaleType="fitCenter"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
@@ -23,7 +23,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/albumTitle" tools:srcCompat="@mipmap/ic_launcher"/>
         <TextView
                 android:id="@+id/albumTitle"
-                android:text="@{album.title}"
+                android:text="@{viewmodel.album.title}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" tools:text="PANINI Чемпионат Мира 2018"
@@ -34,8 +34,8 @@
                 android:layout_marginRight="8dp"/>
         <TextView
                 android:id="@+id/albumSize"
-                app:album_type="@{album.type}"
-                app:album_size="@{album.size}"
+                app:album_type="@{viewmodel.album.type}"
+                app:album_size="@{viewmodel.album.size}"
                 tools:text="Наклеек в коллекции: 838"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:layout_marginStart="16dp"/>
         <TextView
                 android:id="@+id/albumYearOfCreation"
-                app:album_year="@{album.year}"
+                app:album_year="@{viewmodel.album.year}"
                 tools:text="Год выпуска: 2018"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:layout_marginStart="16dp"/>
         <TextView
                 android:id="@+id/albumDescription"
-                android:text="@{album.description}"
+                android:text="@{viewmodel.album.description}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 tools:text="Коллекция наклеек от Panini посвящена чемпионату мира по футболу 2018 в России."

@@ -18,12 +18,12 @@ fun bindIsGone(view: View, visibility: Boolean) {
     }
 }
 
-@BindingAdapter("app:album_year")
+@BindingAdapter("album_year")
 fun bindAlbumYear(textView: TextView, albumYear: Int) {
     textView.text = textView.context.getString(R.string.year_of_creation, albumYear)
 }
 
-@BindingAdapter("app:album_type", "app:album_size",requireAll = true)
+@BindingAdapter("album_type", "album_size",requireAll = true)
 fun bindAlbumSize(textView: TextView, albumType: Int, albumSize: Int) {
     textView.text = textView.context.getString(
         if (albumType == Album.STICKER_TYPE) R.string.number_of_stickers
@@ -31,7 +31,7 @@ fun bindAlbumSize(textView: TextView, albumType: Int, albumSize: Int) {
     )
 }
 
-@BindingAdapter("app:image_from_url")
+@BindingAdapter("image_from_url")
 fun bindImageFromURL(view: ImageView, imageUrl: String?) {
     if(!imageUrl.isNullOrEmpty()) {
         Glide.with(view)

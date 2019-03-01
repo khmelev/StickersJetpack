@@ -7,9 +7,6 @@
         <variable
                 name="album"
                 type="ru.av3969.stickers.jetpack.data.Album"/>
-        <variable
-                name="albumTypeAndSize"
-                type="String"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

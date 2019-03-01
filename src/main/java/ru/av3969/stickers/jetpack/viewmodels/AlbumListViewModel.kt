@@ -21,21 +21,25 @@ class AlbumListViewModel(
     val loading: LiveData<Boolean>
         get() = _loading
 
+    private val _nodata = MutableLiveData<Boolean>()
+    val nodata: LiveData<Boolean>
+        get() = _nodata
+
     private val viewModelJob = Job()
 
     private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     fun loadAlbums(catName: String) {
         viewModelScope.launch(IO) {
-            delay(1500) //Имитация загрузки для проверки прогресс бара
+            delay(1000) //Имитация загрузки для проверки прогресс бара
             repository.getAlbums(catName).let{
                 _loading.postValue(false)
                 _albums.postValue(it)
+                _nodata.postValue(it.isEmpty())
             }
-
         }
         viewModelScope.launch {
-            delay(200)
+            delay(200) //Отложенная проверка, что бы не прям сразу показывать progressBar
             if(_albums.value == null) {
                 _loading.value = true
             }

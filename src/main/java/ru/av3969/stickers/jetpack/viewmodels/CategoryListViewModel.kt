@@ -20,19 +20,24 @@ class CategoryListViewModel(
     val categories: LiveData<List<Category>>
         get() = _categories
 
+    private val _nodata = MutableLiveData<Boolean>()
+    val nodata: LiveData<Boolean>
+        get() = _nodata
+
     private val viewModelJob = Job()
 
     private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     fun loadCategories(parentId: Int) {
         viewModelScope.launch(IO) {
-            _categories.postValue(
-                if(parentId == 0) {
-                    repository.getRootCategories()
-                } else {
-                    repository.getCategories(parentId)
-                }
-            )
+            if(parentId == 0) {
+                repository.getRootCategories()
+            } else {
+                repository.getCategories(parentId)
+            }.let {
+                _categories.postValue(it)
+                _nodata.postValue(it.isEmpty())
+            }
         }
     }
 

@@ -14,38 +14,40 @@ import ru.av3969.stickers.jetpack.viewmodels.AlbumListViewModel
 
 class AlbumListFragment : Fragment() {
 
-    private lateinit var viewModel: AlbumListViewModel
+    private lateinit var albumListViewModel: AlbumListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentAlbumListBinding.inflate(inflater, container, false)
+
+        val factory = InjectorUtils.provideAlbumListViewModelFactory(requireActivity())
+        albumListViewModel = ViewModelProviders.of(this, factory).get(AlbumListViewModel::class.java)
 
         val adapter = AlbumAdapter()
-        binding.albumList.adapter = adapter
 
-        subscribeUI(adapter, binding)
+        val binding = FragmentAlbumListBinding.inflate(inflater, container, false)
+        binding.apply {
+            albumList.adapter = adapter
+            lifecycleOwner = viewLifecycleOwner
+            viewmodel = albumListViewModel
+        }
+
+        subscribeUI(adapter)
         return binding.root
     }
 
-    private fun subscribeUI(adapter: AlbumAdapter, binding: FragmentAlbumListBinding) {
-        val context = context ?: return
-        val factory = InjectorUtils.provideAlbumListViewModelFactory(context)
-        viewModel = ViewModelProviders.of(this, factory).get(AlbumListViewModel::class.java)
-        viewModel.albums.observe(this, Observer {
-            if (it != null && it.isNotEmpty()) {
+    private fun subscribeUI(adapter: AlbumAdapter) {
+
+        albumListViewModel.albums.observe(viewLifecycleOwner, Observer {
+            if (!it.isNullOrEmpty()) {
                 adapter.submitList(it)
-            } else {
-                binding.noData = true
             }
         })
-        viewModel.loading.observe(this, Observer {
-            binding.loading = it
-        })
+
         val catName = arguments?.let { AlbumListFragmentArgs.fromBundle(it).catName } ?: ""
-        viewModel.loadAlbums(catName)
+        albumListViewModel.loadAlbums(catName)
     }
 
 }

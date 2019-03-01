@@ -35,12 +35,12 @@ class CategoryListFragment : Fragment() {
         val factory = InjectorUtils.provideCategoryListViewModelFactory(context)
         viewModel = ViewModelProviders.of(this, factory).get(CategoryListViewModel::class.java)
 
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.categories.observe(this, Observer {
-            if (it != null && it.isNotEmpty()) {
+            if (!it.isNullOrEmpty()) {
                 adapter.submitList(it)
-            } else {
-                binding.noData = true
             }
         })
 

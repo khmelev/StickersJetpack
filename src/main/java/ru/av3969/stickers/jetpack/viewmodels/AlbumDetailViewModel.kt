@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import ru.av3969.stickers.jetpack.data.Album
 import ru.av3969.stickers.jetpack.data.Repository
 import ru.av3969.stickers.jetpack.data.Sticker
@@ -18,7 +15,17 @@ class AlbumDetailViewModel(
     private val albumId: Int
 ) : ViewModel() {
 
-    val album = MutableLiveData<Album>()
+    private val _album = MutableLiveData<Album>()
+    val album: LiveData<Album>
+        get() = _album
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean>
+        get() = _loading
+
+    private val _nodata = MutableLiveData<Boolean>()
+    val nodata: LiveData<Boolean>
+        get() = _nodata
 
     private var _stickers = MutableLiveData<List<Sticker>>()
     val stickers: LiveData<List<Sticker>>
@@ -34,12 +41,21 @@ class AlbumDetailViewModel(
 
     fun loadStickers() {
         viewModelScope.launch(IO) {
-            album.postValue(
+            _album.postValue(
                 repository.getAlbum(albumId)
             )
-            _stickers.postValue(
-                repository.getStickers(albumId)
-            )
+            delay(1000) //Имитация загрузки для проверки прогресс бара
+            repository.getStickers(albumId).let {
+                _loading.postValue(false)
+                _stickers.postValue(it)
+                _nodata.postValue(it.isEmpty())
+            }
+        }
+        viewModelScope.launch {
+            delay(200) //Отложенная проверка, что бы не прям сразу показывать progressBar
+            if(_stickers.value == null) {
+                _loading.value = true
+            }
         }
     }
 

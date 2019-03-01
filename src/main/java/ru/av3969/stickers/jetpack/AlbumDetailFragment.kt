@@ -41,12 +41,8 @@ class AlbumDetailFragment : Fragment() {
         val factory = InjectorUtils.provideAlbumDetailViewModelFactory(context, albumId)
         detailViewModel = ViewModelProviders.of(this, factory).get(AlbumDetailViewModel::class.java)
 
-        detailViewModel.album.observe(this, Observer { album ->
-            with(album) {
-                binding.album = this
-            }
-
-        })
+        binding.viewmodel = detailViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         detailViewModel.stickers.observe(this, Observer {stickers ->
             adapter.submitList(stickers)
