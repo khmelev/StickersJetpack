@@ -47,4 +47,9 @@ class CategoryListFragment : Fragment() {
         val parentId = arguments?.let { CategoryListFragmentArgs.fromBundle(it).catId } ?: 0
         viewModel.loadCategories(parentId)
     }
+
+    override fun onResume() {
+        //simple comment
+        super.onResume()
+    }
 }
