@@ -2,6 +2,7 @@ package ru.av3969.stickers.jetpack
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -20,6 +21,9 @@ class StartActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.NightBaseAppTheme)
+        }
         super.onCreate(savedInstanceState)
 
         val binding: ActivityStartBinding = DataBindingUtil.setContentView(this,
