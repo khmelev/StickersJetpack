@@ -12,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import ru.av3969.stickers.jetpack.databinding.ActivityStartBinding
 
 class StartActivity : AppCompatActivity() {
@@ -21,9 +22,7 @@ class StartActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            setTheme(R.style.NightBaseAppTheme)
-        }
+        setupNightMode()
         super.onCreate(savedInstanceState)
 
         val binding: ActivityStartBinding = DataBindingUtil.setContentView(this,
@@ -48,6 +47,14 @@ class StartActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+        }
+    }
+
+    private fun setupNightMode() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val nightMode = sharedPreferences.getBoolean("nightMode", false)
+        if(nightMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
 }

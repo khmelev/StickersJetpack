@@ -10,4 +10,6 @@
     <string name="subcategories">Подкатегории</string>
     <string name="albums">Альбомы</string>
     <string name="album">Альбом</string>
+    <string name="settings">Настройки</string>
+    <string name="night_mode">Ночной режим</string>
 </resources>

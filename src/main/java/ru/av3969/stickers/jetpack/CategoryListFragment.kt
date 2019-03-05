@@ -48,8 +48,4 @@ class CategoryListFragment : Fragment() {
         viewModel.loadCategories(parentId)
     }
 
-    override fun onResume() {
-        //simple comment
-        super.onResume()
-    }
 }
