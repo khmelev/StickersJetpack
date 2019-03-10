@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.*
 import ru.av3969.stickers.jetpack.data.Album
 import ru.av3969.stickers.jetpack.data.Repository
+import ru.av3969.stickers.jetpack.utilities.map
 
 class AlbumListViewModel(
     private val repository: Repository
@@ -20,9 +21,9 @@ class AlbumListViewModel(
     val loading: LiveData<Boolean>
         get() = _loading
 
-    private val _nodata = MutableLiveData<Boolean>()
-    val nodata: LiveData<Boolean>
-        get() = _nodata
+    val nodata: LiveData<Boolean> = albums.map {
+        it.isEmpty()
+    }
 
     private val viewModelJob = Job()
 
@@ -31,11 +32,9 @@ class AlbumListViewModel(
     fun loadAlbums(catName: String) {
         viewModelScope.launch {
             delay(1000) //Имитация загрузки для проверки прогресс бара
-            withContext(Dispatchers.IO) { repository.getAlbums(catName) }
-                .let{
+            withContext(Dispatchers.IO) { repository.getAlbums(catName) }.let {
                 _loading.value = false
                 _albums.value = it
-                _nodata.value = it.isEmpty()
             }
         }
         viewModelScope.launch {

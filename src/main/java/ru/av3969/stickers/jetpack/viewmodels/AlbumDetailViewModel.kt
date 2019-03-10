@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import ru.av3969.stickers.jetpack.data.Album
 import ru.av3969.stickers.jetpack.data.Repository
 import ru.av3969.stickers.jetpack.data.Sticker
+import ru.av3969.stickers.jetpack.utilities.map
 
 class AlbumDetailViewModel(
     private val repository: Repository,
@@ -23,13 +24,13 @@ class AlbumDetailViewModel(
     val loading: LiveData<Boolean>
         get() = _loading
 
-    private val _nodata = MutableLiveData<Boolean>()
-    val nodata: LiveData<Boolean>
-        get() = _nodata
-
     private var _stickers = MutableLiveData<List<Sticker>>()
     val stickers: LiveData<List<Sticker>>
         get() = _stickers
+
+    val nodata: LiveData<Boolean> = stickers.map {
+        it.isEmpty()
+    }
 
     private val viewModelJob = Job()
 
@@ -48,7 +49,6 @@ class AlbumDetailViewModel(
             repository.getStickers(albumId).let {
                 _loading.postValue(false)
                 _stickers.postValue(it)
-                _nodata.postValue(it.isEmpty())
             }
         }
         viewModelScope.launch {

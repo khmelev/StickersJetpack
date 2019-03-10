@@ -11,6 +11,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import ru.av3969.stickers.jetpack.data.Category
 import ru.av3969.stickers.jetpack.data.Repository
+import ru.av3969.stickers.jetpack.utilities.map
 
 class CategoryListViewModel(
     private val repository: Repository
@@ -20,9 +21,9 @@ class CategoryListViewModel(
     val categories: LiveData<List<Category>>
         get() = _categories
 
-    private val _nodata = MutableLiveData<Boolean>()
-    val nodata: LiveData<Boolean>
-        get() = _nodata
+    val nodata: LiveData<Boolean> = categories.map {
+        it.isEmpty()
+    }
 
     private val viewModelJob = Job()
 
@@ -36,7 +37,6 @@ class CategoryListViewModel(
                 repository.getCategories(parentId)
             }.let {
                 _categories.postValue(it)
-                _nodata.postValue(it.isEmpty())
             }
         }
     }
